@@ -1,11 +1,12 @@
 // Colton O'Connor
-// Assignment 7
+// Final Project
 // Hoenigman
 
 #include "SongTree.h"
 #include <iostream>
+#include <string>
 
-// Instance of movie tree with a null root
+// Instance of song tree with a null root
 SongTree::SongTree(){
     root = new SongNode;
     root = NULL;
@@ -13,7 +14,7 @@ SongTree::SongTree(){
 // circular virtual
 SongTree::~SongTree(){
 }
-/* the initial call to printing the movie inventory. If the root is not null
+/* the initial call to printing the song inventory. If the root is not null
     then it calls the recursive version of this function and passes the left child
     first, then it prints the root, then it continues and calls the recursive function
     with the right child */
@@ -26,10 +27,10 @@ void SongTree::printSongInventory(){
         printSongInventory(root->rightChild);
     }
 }
-/* This is the recursive print movie function, if the leftchild node is not null, then
+/* This is the recursive print song function, if the leftchild node is not null, then
 call it again with the leftchild of the node as the parameter to be searched. Once the
 leftchild is NULL, that means that the minimum / top of the list has been found, and so it'll
-print out the movie with the leftchild pointer which is null. Then it passes its rightchild and does
+print out the song with the leftchild pointer which is null. Then it passes its rightchild and does
 the same thing (as long as its not null in the first place). */
 void SongTree::printSongInventory(SongNode *node){
     if(node->leftChild!=NULL){
@@ -40,9 +41,9 @@ void SongTree::printSongInventory(SongNode *node){
         printSongInventory(node->rightChild);
     }
 }
-/* The function that adds movies. It creates a new movie node with all of the provided information that
+/* The function that adds songs. It creates a new song node with all of the provided information that
 is read in and sets its children to be null. Root is stored in x, and the parent is called p. The function
-compares the titles of the movie character by character. If the character of the movie being read in
+compares the titles of the song character by character. If the character of the song being read in
 is smaller in ASCII value, then x is set to the left child and it keeps traversing until it finds a NULL
 and places it as rightchild or leftchild to the parent according to ASCII value again */
 void SongTree::addSongNode(std::string artist, std::string title, int releaseYear, std::string album, std::string genre){
@@ -115,26 +116,31 @@ void SongTree::addSongNode(std::string artist, std::string title, int releaseYea
         }
         if(skip==false){
             if(char1<char2){
-                p->leftChild = movie;
+                p->leftChild = song;
             }
             else if(char1>char2){
-                p->rightChild = movie;
+                p->rightChild = song;
             }
         }
     }
 }
-/* The function that finds movies. It uses the same logic as the above function. It compares the title of the
-movie that is being looked for with the root. It compares the title of the root with the title char by char,
-and if it equal, then it has found the movie, and returns the movie node into movieNode. If the title is before
-the title in alphabetical order, then it will begin to traverse the left root of the tree with searchMovieTree and
-will return the movie node if it is found, if not it will return NULL. If the title is after in alphabetical order to the
-title of the root, then it will searchMovieTree through the right root of the tree. Again, return the movie node into foundMovie,
-or NULL if not found. The function compares the titles of the movie character by character. Then, if foundMovie is equal to NULL, it
-will display that the movie was not found, else, it will extract all the data from the node and display it. */
+
+void SongTree::deleteSongNode(std::string title){
+    SongNode *dnode = search(title);
+    
+}
+/* The function that finds songs. It uses the same logic as the above function. It compares the title of the
+song that is being looked for with the root. It compares the title of the root with the title char by char,
+and if it equal, then it has found the song, and returns the song node into movieNode. If the title is before
+the title in alphabetical order, then it will begin to traverse the left root of the tree with searchSongTree and
+will return the song node if it is found, if not it will return NULL. If the title is after in alphabetical order to the
+title of the root, then it will searchSongTree through the right root of the tree. Again, return the song node into foundSong,
+or NULL if not found. The function compares the titles of the song character by character. Then, if foundSong is equal to NULL, it
+will display that the song was not found, else, it will extract all the data from the node and display it. */
 void SongTree::findSong(std::string title){
     bool skip = false;
     int place = 0;
-    SongNode *SongMovie = root;
+    SongNode *foundSong = root;
     if(root->title == title){
         foundSong = foundSong;
     }
@@ -174,8 +180,8 @@ void SongTree::findSong(std::string title){
     if(foundSong!=NULL){
         std::cout<<"Song Info:"<<std::endl;
         std::cout<<"==========="<<std::endl;
-        std::cout<<"Artist:"<<foundSong->artist<<std::endl;
         std::cout<<"Title:"<<foundSong->title<<std::endl;
+        std::cout<<"Artist:"<<foundSong->artist<<std::endl;
         std::cout<<"Album:"<<foundSong->album<<std::endl;
         std::cout<<"Year Released:"<<foundSong->year<<std::endl;
         std::cout<<"Genre:"<<foundSong->genre<<std::endl;
@@ -184,14 +190,14 @@ void SongTree::findSong(std::string title){
         std::cout<<"Information not found."<<std::endl;
     }
 }
-/* This is the recursive version of searchMovieTree and does the same as the above function, but starts comparing on the
-node / leaf that was passed to it. It compares the title of the movie that is being looked
+/* This is the recursive version of searchSongTree and does the same as the above function, but starts comparing on the
+node / leaf that was passed to it. It compares the title of the song that is being looked
 for with the node. It compares the title of the node with the title char by char,
-and if it equal, then it has found the movie, and returns the movie node. If the title is before
+and if it equal, then it has found the song, and returns the song node. If the title is before
 the title in alphabetical order, then it will begin to traverse the left child of the that node with searchMovieTree with that node as the parameter and
-will return the movie node if it is found, if not it will return NULL. If the title is after in alphabetical order to the
-title of the node, then it will searchMovieTree through the right node of the tree. It does the same as it does for the leftchildren but
-on the right side. The function compares the titles of the movie character by character. swag. */
+will return the song node if it is found, if not it will return NULL. If the title is after in alphabetical order to the
+title of the node, then it will searchSongTree through the right node of the tree. It does the same as it does for the leftchildren but
+on the right side. The function compares the titles of the song character by character. */
 SongNode* SongTree::search(std::string title){
     SongNode *node = new SongNode;
     int place = 0;
@@ -234,6 +240,3 @@ SongNode* SongTree::search(std::string title){
         }
     }
 }
-/* Searches the movie tree recursively with the root and the title of the movie being looked for. If the return from searchMovieTree is NULL,
-the it will display that the movie was not found. If the movie was found but quantity is zero, display movie is out of stock. And if the movie is not
-NULL but the quantity is greater than zero, then subtract one from quantity, say it was rented, and display all the information on the movie. */
