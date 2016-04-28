@@ -20,7 +20,7 @@ SongTree::~SongTree(){
     with the right child */
 void SongTree::printSongInventory(){
     if(root->leftChild!=NULL){
-        printMovieInventory(root->leftChild);
+        printSongInventory(root->leftChild);
     }
     std::cout<<"Song: "<<root->title<<std::endl;
     if(root->rightChild!=NULL){
@@ -190,6 +190,15 @@ void SongTree::findSong(std::string title){
         std::cout<<"Information not found."<<std::endl;
     }
 }
+
+void printGenre(std::string genre){
+    
+}
+
+void printDecade(int year){
+    
+}
+
 /* This is the recursive version of searchSongTree and does the same as the above function, but starts comparing on the
 node / leaf that was passed to it. It compares the title of the song that is being looked
 for with the node. It compares the title of the node with the title char by char,
