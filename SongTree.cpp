@@ -192,11 +192,113 @@ void SongTree::findSong(std::string title){
 }
 
 void printGenre(std::string genre){
-    
+    bool skip = false;
+    int place = 0;
+    SongNode *foundSong = root;
+    string title = foundSong->title; 
+    std::cout<<"Song in the Genre:"<<genre<<std:endl;
+    std::cout<<"=========="<<std::endl;
+    while(foundSong != NULL){
+        if(root->genre == genre){
+            std::cout<<"Title:"<<foundSong->title<<std::endl;
+            std::cout<<"Artist:"<<foundSong->artist<<std::endl;
+            std::cout<<"Album:"<<foundSong->album<<std::endl;
+            std::cout<<"Year Released:"<<foundSong->year<<std::endl;
+            std::cout<<"Genre:"<<foundSong->genre<<std::endl;
+            std::cout<<"=========="<<std::endl;
+        }
+        else if(root->title.std::string::at(0) > title.std::string::at(0)){
+            foundSong = search(title);
+        }
+        else if(root->title.std::string::at(0) < title.std::string::at(0)){
+            foundSong = search(title);
+        }
+        else if(root->title.std::string::at(0) == title.std::string::at(0)){
+            place = 0;
+            while(root->title.std::string::at(place)==title.std::string::at(place)){
+                skip = false;
+                place++;
+                if(place>=(title.std::string::length())){
+                    skip = true;
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+                if(place>=(root->title.std::string::length())){
+                    skip = true;
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+            }
+            if(skip==false){
+                if(title.std::string::at(place)<root->title.std::string::at(place)){
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+                else if(title.std::string::at(place)>root->title.std::string::at(place)){
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+            }
+        }
+        else if(foundSong==NULL){
+            std::cout<<"Information not found."<<std::endl;
+        }
+    }
 }
 
 void printDecade(int year){
-    
+    bool skip = false;
+    int place = 0;
+    SongNode *foundSong = root;
+    string title = foundSong->title; 
+    std::cout<<"Song in the Decade:"<<year<<" to "<<year+9<<std:endl;
+    std::cout<<"=========="<<std::endl;
+    while(foundSong != NULL){
+        if(root->year<year+10 && root->year >= year){
+            std::cout<<"Title:"<<foundSong->title<<std::endl;
+            std::cout<<"Artist:"<<foundSong->artist<<std::endl;
+            std::cout<<"Album:"<<foundSong->album<<std::endl;
+            std::cout<<"Year Released:"<<foundSong->year<<std::endl;
+            std::cout<<"Genre:"<<foundSong->genre<<std::endl;
+            std::cout<<"=========="<<std::endl;
+        }
+        else if(root->title.std::string::at(0) > title.std::string::at(0)){
+            foundSong = search(title);
+        }
+        else if(root->title.std::string::at(0) < title.std::string::at(0)){
+            foundSong = search(title);
+        }
+        else if(root->title.std::string::at(0) == title.std::string::at(0)){
+            place = 0;
+            while(root->title.std::string::at(place)==title.std::string::at(place)){
+                skip = false;
+                place++;
+                if(place>=(title.std::string::length())){
+                    skip = true;
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+                if(place>=(root->title.std::string::length())){
+                    skip = true;
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+            }
+            if(skip==false){
+                if(title.std::string::at(place)<root->title.std::string::at(place)){
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+                else if(title.std::string::at(place)>root->title.std::string::at(place)){
+                    std::cout<<root->title<<std::endl;
+                    foundSong = search(title);
+                }
+            }
+        }
+        else if(foundSong==NULL){
+            std::cout<<"Information not found."<<std::endl;
+        }
+    }
 }
 
 /* This is the recursive version of searchSongTree and does the same as the above function, but starts comparing on the
