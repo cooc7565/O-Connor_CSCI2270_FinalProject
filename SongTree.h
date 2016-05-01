@@ -47,9 +47,7 @@ class SongTree
     private:
         void DeleteAll(SongNode * node); //use this for the post-order traversal deletion of the tree
         void printSongInventory(SongNode * node);
-        void countSongNodes(SongNode *node, int *c);
         SongNode* search(std::string title);
-        SongNode* treeMinimum(SongNode *node);
         SongNode *root;
 };
 
